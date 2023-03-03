@@ -2,7 +2,7 @@
 
 import { Component } from 'react';
 import { Container } from "./App.styled"; 
-
+import { ContactsForm } from './ContactsForm/ContactsForm';
 
 export class App extends Component {
   state = {
@@ -36,10 +36,14 @@ export class App extends Component {
   }  
 
   addContact = e => {
-    e.preventDefault();
+    // e.preventDefault();
     console.log(this.state);
+    const { name } = this.state;
     
-  }
+    return name;
+  };
+
+     
 
   render() {
     return (
@@ -61,7 +65,10 @@ export class App extends Component {
             <button type="submit">Add contact</button> 
           </label>
         </form>
-        
+        <ul>
+          <li>{this.addContact()}</li>
+        </ul>
+        <ContactsForm item={this.addContact()}/>
         
     </Container>);
   }

@@ -1,11 +1,10 @@
-import { Component } from 'react';
+// import { Component } from 'react';
 // import { Form } from 'formik';
 
-export const ContactsForm = ({ onSubmit }) => {
+export const ContactsForm = ({ item }) => {
     return (
-        {
-
-
-    }
+         <ul>
+          <li>{item}</li>
+        </ul>
     );
 }
