@@ -8,39 +8,32 @@ export class App extends Component {
   state = {
     contacts: [],
     name: '',
-    id: ''
+    id: '',
+    newContact: ''
   }
 
   
 
   handleInputChange = e => {
-    // const arrayOfContactsName = [];
-    const { value } = e.currentTarget;
-    // for (const contact of this.state.contacts) {
-    //   arrayOfContactsName.push(contact.name);
-    // }
     
-    this.setState({ name: value, contacts:  value });
-    console.log(value);
+    const { value } = e.currentTarget;
+       
+    this.setState({ newContact: value });
+    console.log(this.state.newContact);
    
-  //   <ul>
-  //      <li key={item.id} style={{ paddingBottom: '10px' }}>
-  //         <span style={{ width: '220px' }}>
-  //           {' '}
-  //           {item.name} : {item.number}{' '}
-  //       </span>
-  //       </li>
-  //     ))}
-  //   </ul>
-  // );
   }  
 
-  addContact = e => {
-    // e.preventDefault();
-    console.log(this.state);
-    const { name } = this.state;
-    
-    return name;
+
+handleSubmit = e => {
+e.preventDefault();
+
+this.props.onSubmit(this.state.newContact);
+// this.setState({newContact: ''});
+  }
+
+
+  addContact = item => {
+    return item;    
   };
 
      
@@ -51,7 +44,7 @@ export class App extends Component {
         
         <h1>Phonebook</h1>
         <h2>Name</h2>
-        <form onSubmit={this.addContact}>
+        <form onSubmit={this.handleSubmit}>
           <label>
         <input
       type="text"
@@ -59,7 +52,7 @@ export class App extends Component {
       pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
       title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            value={this.state.name}
+            value={this.state.value}
             onChange={this.handleInputChange}
         />
             <button type="submit">Add contact</button> 
@@ -68,7 +61,7 @@ export class App extends Component {
         <ul>
           <li>{this.addContact()}</li>
         </ul>
-        <ContactsForm item={this.addContact()}/>
+        <ContactsForm onSubmit={this.addContact}/>
         
     </Container>);
   }
