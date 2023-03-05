@@ -21,4 +21,18 @@ const ErrorMessage = styled(FormikError)`
 color: red;
 `;
 
-export { Form, FormField, ErrorMessage };
+const FormButton = styled.button`
+
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 2px 0;
+  border: 1px solid gray;
+    &:hover {
+    background-color: #bbe4e9;
+    font-weight: 700;
+    color: #f95959;
+  }
+`;
+
+
+export { Form, FormField, ErrorMessage, FormButton  };

@@ -1,5 +1,5 @@
 import { Formik, Field } from 'formik';
-import { Form, FormField, ErrorMessage } from './ContactsForm.styled';
+import { Form, FormField, ErrorMessage, FormButton } from './ContactsForm.styled';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
@@ -47,7 +47,7 @@ export const ContactsForm = ({ onSubmit }) => {
           <ErrorMessage name="number" component="div" />
         </FormField>
 
-        <button type="submit">Add contact</button>
+        <FormButton type="submit">Add contact</FormButton>
       </Form>
     </Formik>
   );
