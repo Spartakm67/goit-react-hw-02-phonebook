@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Container } from "./App.styled"; 
+import { Container, IfEmpty } from "./App.styled"; 
 import { ContactsForm } from "./ContactsForm/ContactsForm";
 import { ContactsFormList } from './ContactsFormList/ContactsFormList';
 import { Filter } from './Filter/Filter';
@@ -16,14 +16,19 @@ state = {
     filter: '',
   };
 
+  
+  handleInputChange = event => {
+    this.setState({ filter: event.target.value });
+  };
+
   addContact = newContact => {
-    const arrayOfContactsName = [];
+    const ContactsArray = [];
 
     for (const contact of this.state.contacts) {
-      arrayOfContactsName.push(contact.name);
+      ContactsArray.push(contact.name);
     }
 
-    if (arrayOfContactsName.includes(newContact.name)) {
+    if (ContactsArray.includes(newContact.name)) {
       Notiflix.Notify.failure(`${newContact.name} is already in contacts`);
       return;
     }
@@ -35,21 +40,17 @@ state = {
     });
   };
 
-  deleteContact = contactId => {
+  deleteContact = id => {
     this.setState(prevState => {
       return {
         contacts: prevState.contacts.filter(
-          contact => contact.id !== contactId
+          contact => contact.id !== id
         ),
       };
     });
   };
 
-  handleInputChange = event => {
-    this.setState({ filter: event.target.value });
-  };
-
-  actualVisibleContact = () => {
+  showContacts = () => {
     const { filter, contacts } = this.state;
 
     return contacts.filter(contact =>
@@ -68,11 +69,11 @@ state = {
         <Filter value={filter} onChange={this.handleInputChange} />
         {contacts.length > 0 ? (
           <ContactsFormList
-            items={this.actualVisibleContact()}
+            items={this.showContacts()}
             onDelete={this.deleteContact}
           />
         ) : (
-          <p> Phonebook is empty</p>
+          <IfEmpty> Phonebook is empty</IfEmpty>
         )}
         
     </Container>);
