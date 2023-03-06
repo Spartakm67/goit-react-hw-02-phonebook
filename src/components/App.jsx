@@ -22,13 +22,11 @@ state = {
   };
 
   addContact = newContact => {
-    const ContactsArray = [];
-
-    for (const contact of this.state.contacts) {
-      ContactsArray.push(contact.name);
-    }
-
-    if (ContactsArray.includes(newContact.name)) {
+    
+    const isNameExists = this.state.contacts.find(contact =>
+      contact.name.toLowerCase() === newContact.name.toLowerCase());
+    
+    if (isNameExists) {
       Notiflix.Notify.failure(`${newContact.name} is already in contacts`);
       return;
     }
